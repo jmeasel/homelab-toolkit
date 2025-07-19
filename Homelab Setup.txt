@@ -1,0 +1,131 @@
+# 🏠 Jake's Homelab Setup
+
+Welcome to my personal homelab — a hybrid dev, automation, and ethical hacking lab built for real-world testing, private media hosting, and leveling up IT skills from the ground up.
+
+---
+
+## 🧠 Overview
+
+This setup powers my entire smart home, handles media and automation, and gives me a full-blown ethical hacking playground. It’s modular, secure, and fully documented.
+
+---
+
+## 🧱 Hardware Breakdown
+
+### 🖥️ TrueNAS SCALE Server
+- **CPU**: Intel i5-9600K
+- **RAM**: 16GB DDR4
+- **Storage**:
+  - 1TB NVMe (boot + apps)
+  - 1TB HDD (media + downloads)
+
+### 🍓 Raspberry Pi 5 (8GB RAM)
+- Lightweight services & DNS
+- Runs Pi-hole and Portainer
+
+### 🎮 Gaming PC
+- **CPU**: AMD Ryzen 7 9700X
+- **RAM**: 32GB DDR5 6000MHz
+- **Motherboard**: GIGABYTE B650 AORUS Elite AX ICE
+- **OS**: Windows 11 + Kali Linux (dual boot or VM)
+
+---
+
+## 🐳 TrueNAS SCALE – Docker Stack (via Dockge)
+
+> Managed using [Dockge](https://github.com/louislam/dockge)
+
+| App          | Role                         |
+|--------------|------------------------------|
+| `qbittorrent` + `gluetun` | Private torrenting via VPN (Windscribe + WireGuard) |
+| `sonarr`, `radarr`        | TV/movie automation (indexers + media management) |
+| `jackett`                | Torznab indexer hub |
+| `ombi` + `omnibot`       | Discord-integrated media requests |
+| `heimdall`               | Dashboard for homelab apps |
+| `speedtest`              | Scheduled network performance checks |
+
+**Config Directory**: `/mnt/Drive1/Docakge/config`
+
+---
+
+## 📺 Plex Media Server
+
+- Installed as a **TrueNAS SCALE App**
+- Serves 5.1 audio and video content to local and remote clients
+- Plex media folder: `/mnt/Drive1/Plex`
+
+---
+
+## 🧰 Home Assistant OS (HAOS)
+
+- Runs as a **VM** inside TrueNAS SCALE
+- Fully isolated Home Assistant experience
+- **Integrated Devices**:
+  - Tuya smart lights
+  - Pioneer VSX-LX305 (via Onkyo integration)
+  - Blink cameras
+- **Future Plans**:
+  - iOS/macOS automations
+  - Zigbee or MQTT support via Raspberry Pi bridge
+
+---
+
+## 🍓 Raspberry Pi Services
+
+- **Pi-hole** @ `192.168.0.200`  
+  Central DNS + network-wide ad blocking
+
+- **Portainer**  
+  Container management GUI (managing Pi containers only)
+
+---
+
+## 🔐 Ethical Hacking & Dev Toolkit (Gaming PC)
+
+### Tools Installed:
+- **VS Code** (with extensions):
+  - Python
+  - Docker
+  - GitLens
+  - GitHub Copilot (trial)
+  - Remote SSH
+- **Python 3.x** (`pip install requests`)
+- **Docker + Docker Compose**
+- **Postman**
+- **Git + GitHub**
+- **Kali Linux** (bare-metal or VM for pentesting)
+
+### Kali Use Cases:
+- Test exploits against Docker-based vulnerable apps
+- Run Nmap, Burp Suite, SQLmap, Hydra, and Wireshark
+- Store scripts and reports in a private GitHub repo
+- SSH into Pi or TrueNAS to test remote exploits in the lab
+
+---
+
+## 🕸️ Network Infrastructure
+
+- **DNS**: Pi-hole (`192.168.0.200`)
+- **VPN**: Gluetun (WireGuard) routes qBittorrent traffic
+- **SMB Shares**:
+  - `/mnt/Drive1/Plex`
+  - `/mnt/Drive1/QBittorrent/Downloads`
+- **Permissions Fix**: Unified access for Plex, SMB, and Docker (via `mediaaccess` group)
+
+---
+
+## 📦 GitHub-Ready Folder Structure (Recommended)
+
+```plaintext
+/homelab-toolkit
+├── EthicalHackingLab/
+│   ├── docker-compose.yml       # Vuln apps (DVWA, Juice Shop, etc.)
+│   ├── scripts/
+│   ├── payloads/
+│   └── reports/
+├── HomeAssistant/
+│   └── automation_scripts/
+├── DockgeStacks/
+│   └── qbittorrent_gluetun.yml
+├── README.md
+└── .gitignore
