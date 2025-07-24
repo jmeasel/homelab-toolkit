@@ -1,29 +1,29 @@
-# 🏠 Jake's Homelab Setup
+# Jake's Homelab Setup
 
 Welcome to my personal homelab — a hybrid dev, automation, and ethical hacking lab built for real-world testing, private media hosting, and leveling up IT skills from the ground up.
 
 ---
 
-## 🧠 Overview
+##  Overview
 
 This setup powers my entire smart home, handles media and automation, and gives me a full-blown ethical hacking playground. It’s modular, secure, and fully documented.
 
 ---
 
-## 🧱 Hardware Breakdown
+##  Hardware Breakdown
 
-### 🖥️ TrueNAS SCALE Server
+###  TrueNAS SCALE Server
 - **CPU**: Intel i5-9600K
 - **RAM**: 16GB DDR4
 - **Storage**:
   - 1TB NVMe (boot + apps)
   - 1TB HDD (media + downloads)
 
-### 🍓 Raspberry Pi 5 (8GB RAM)
+###  Raspberry Pi 5 (8GB RAM)
 - Lightweight services & DNS
 - Runs Pi-hole and Portainer
 
-### 🎮 Gaming PC
+###  Gaming PC
 - **CPU**: AMD Ryzen 7 9700X
 - **RAM**: 32GB DDR5 6000MHz
 - **Motherboard**: GIGABYTE B650 AORUS Elite AX ICE
@@ -31,7 +31,7 @@ This setup powers my entire smart home, handles media and automation, and gives 
 
 ---
 
-## 🐳 TrueNAS SCALE – Docker Stack (via Dockge)
+## TrueNAS SCALE – Docker Stack (via Dockge)
 
 > Managed using [Dockge](https://github.com/louislam/dockge)
 
@@ -48,7 +48,7 @@ This setup powers my entire smart home, handles media and automation, and gives 
 
 ---
 
-## 📺 Plex Media Server
+## Plex Media Server
 
 - Installed as a **TrueNAS SCALE App**
 - Serves 5.1 audio and video content to local and remote clients
@@ -56,7 +56,7 @@ This setup powers my entire smart home, handles media and automation, and gives 
 
 ---
 
-## 🧰 Home Assistant OS (HAOS)
+## Home Assistant OS (HAOS)
 
 - Runs as a **VM** inside TrueNAS SCALE
 - Fully isolated Home Assistant experience
@@ -70,7 +70,7 @@ This setup powers my entire smart home, handles media and automation, and gives 
 
 ---
 
-## 🍓 Raspberry Pi Services
+## Raspberry Pi Services
 
 - **Pi-hole** @ `192.168.0.200`  
   Central DNS + network-wide ad blocking
@@ -80,7 +80,7 @@ This setup powers my entire smart home, handles media and automation, and gives 
 
 ---
 
-## 🔐 Ethical Hacking & Dev Toolkit (Gaming PC)
+## Ethical Hacking & Dev Toolkit (Gaming PC)
 
 ### Tools Installed:
 - **VS Code** (with extensions):
@@ -93,7 +93,7 @@ This setup powers my entire smart home, handles media and automation, and gives 
 - **Docker + Docker Compose**
 - **Postman**
 - **Git + GitHub**
-- **Kali Linux** (bare-metal or VM for pentesting)
+- **Kali Linux** 
 
 ### Kali Use Cases:
 - Test exploits against Docker-based vulnerable apps
@@ -103,7 +103,7 @@ This setup powers my entire smart home, handles media and automation, and gives 
 
 ---
 
-## 🕸️ Network Infrastructure
+## Network Infrastructure
 
 - **DNS**: Pi-hole (`192.168.0.200`)
 - **VPN**: Gluetun (WireGuard) routes qBittorrent traffic
@@ -111,21 +111,3 @@ This setup powers my entire smart home, handles media and automation, and gives 
   - `/mnt/Drive1/Plex`
   - `/mnt/Drive1/QBittorrent/Downloads`
 - **Permissions Fix**: Unified access for Plex, SMB, and Docker (via `mediaaccess` group)
-
----
-
-## 📦 GitHub-Ready Folder Structure (Recommended)
-
-```plaintext
-/homelab-toolkit
-├── EthicalHackingLab/
-│   ├── docker-compose.yml       # Vuln apps (DVWA, Juice Shop, etc.)
-│   ├── scripts/
-│   ├── payloads/
-│   └── reports/
-├── HomeAssistant/
-│   └── automation_scripts/
-├── DockgeStacks/
-│   └── qbittorrent_gluetun.yml
-├── README.md
-└── .gitignore
