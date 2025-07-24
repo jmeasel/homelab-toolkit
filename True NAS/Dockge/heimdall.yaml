@@ -1,0 +1,12 @@
+services:
+  heimdall:
+    image: linuxserver/heimdall
+    ports:
+      - 8082:80
+    volumes:
+      - /mnt/Drive1/Docakge/config/heimdall:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    restart: unless-stopped

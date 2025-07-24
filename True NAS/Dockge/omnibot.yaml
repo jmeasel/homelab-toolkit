@@ -1,0 +1,16 @@
+services:
+  omnibot:
+    image: python:3.11
+    container_name: omnibot
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - /mnt/Drive1/OmniBotStack/app:/app
+      - /mnt/Drive1/Plex/Movies:/movies
+    environment:
+      DISCORD_TOKEN: Example
+      RADARR_API_KEY: Example
+      RADARR_URL: :7878
+      QUALITY_PROFILE_ID: 1
+      ROOT_FOLDER_PATH: /movies
+    command: sh -c "pip install discord.py requests && python bot.py"
