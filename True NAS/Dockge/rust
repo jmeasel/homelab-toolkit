@@ -1,0 +1,39 @@
+services:
+  rust:
+    image: cm2network/steamcmd:root
+    container_name: rust
+    restart: unless-stopped
+    network_mode: host
+    shm_size: 1g
+    entrypoint:
+      - /bin/bash
+    command:
+      - -c
+      - >
+        /home/steam/steamcmd/steamcmd.sh +force_install_dir /rust +login
+        anonymous +app_update 258550 validate +quit
+
+        cd /rust
+
+        ./RustDedicated -batchmode \
+          +server.ip 0.0.0.0 \
+          +server.port 28015 \
+          +server.queryport 28017 \
+          +rcon.ip 0.0.0.0 \
+          +rcon.port 28016 \
+          +rcon.web 1 \
+          +server.level "Procedural Map" \
+          +server.seed 12345 \
+          +server.worldsize 4000 \
+          +server.maxplayers 50 \
+          +server.hostname "" \
+          +server.description "Private Server" \
+          +server.identity "main" \
+          +server.password "" \
+          +rcon.password "" \
+          +server.saveinterval 300 \
+          +server.secure 1
+    volumes:
+      - /mnt/Drive1/rust:/rust
+    stop_grace_period: 2m
+networks: {}
