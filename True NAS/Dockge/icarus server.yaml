@@ -1,0 +1,24 @@
+services:
+  icarus:
+    image: nerodon/icarus-dedicated:latest
+    container_name: icarus2-dedicated
+    hostname: icarus
+    restart: unless-stopped
+    stop_grace_period: 90s
+    ports:
+      - 17777:17777/udp
+      - 27015:27015/udp
+    volumes:
+      - /mnt/Drive1/Icarus/data:/home/icarus/drive_c/icarus
+      - /mnt/Drive1/Icarus/game:/opt/icarus
+    environment:
+      - TZ=America/New_York
+      - SERVER_NAME=
+      - SERVER_PASSWORD=
+      - SERVER_ADMIN_PASSWORD=
+      - SERVER_MAX_PLAYERS=8
+      - SERVER_PORT=17777
+      - SERVER_QUERYPORT=27015
+      - PUID=1000
+      - PGID=1000
+    networks: {}
