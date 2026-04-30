@@ -1,0 +1,25 @@
+services:
+  satisfactory:
+    container_name: satisfactory-dedicated
+    image: wolveix/satisfactory-server:latest
+    restart: unless-stopped
+    ports:
+      - 7777:7777/udp # Game port
+      - 15000:15000/udp # Beacon port
+      - 15777:15777/udp # Query port
+      - 9001:9001/udp
+      - 9001:9001/tcp 
+      - 7777:7777/tcp 
+    volumes:
+      - /mnt/Drive1/Satisfactory:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MAXPLAYERS=8
+      - STEAMBETA=false
+      - TIMEOUT=60
+      - SERVERGAMEPORT=7777
+      - SERVERBEACONPORT=15000
+      - SERVERQUERYPORT=15777
+      - SERVERMESSAGINGPORT=9001
+networks: {}
