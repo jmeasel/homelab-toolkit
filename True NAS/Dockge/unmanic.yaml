@@ -1,0 +1,16 @@
+services:
+  unmanic:
+    image: josh5/unmanic:latest
+    container_name: unmanic
+    restart: unless-stopped
+    ports:
+      - 8890:8888
+    environment:
+      - TZ=America/New_York
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /mnt/Drive1/Unmanic/config:/config
+      - /mnt/Drive1/Plex:/library
+      - /mnt/Drive1/Unmanic/tmp:/tmp
+networks: {}
