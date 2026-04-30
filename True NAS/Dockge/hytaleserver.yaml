@@ -1,0 +1,26 @@
+services:
+  hytale:
+    image: indifferentbroccoli/hytale-server-docker
+    container_name: hytaleserver
+    hostname: hytale
+    restart: unless-stopped
+    stop_grace_period: 30s
+    stdin_open: true
+    tty: true
+    ports:
+      - 5520:5520/udp
+    volumes:
+      - /mnt/Drive1/Hytale/server-files:/home/hytale/server-files
+    environment:
+      - TZ=America/New_York
+      - SERVER_NAME=
+      - MAX_MEMORY=4G
+      - MIN_MEMORY=1G
+      - MAX_PLAYERS=20
+      - VIEW_DISTANCE=12
+      - DOWNLOAD_ON_START=true
+      - ENABLE_BACKUPS=true
+      - BACKUP_FREQUENCY=30
+      - PUID=1000
+      - PGID=1000
+    networks: {}
