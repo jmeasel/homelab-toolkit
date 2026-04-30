@@ -1,0 +1,14 @@
+services:
+  speed:
+    image: ghcr.io/librespeed/speedtest
+    container_name: speedtest
+    restart: unless-stopped
+    ports:
+      - 8083:8080 # external 8082 → internal 8080 to avoid conflicts (e.g., with Gluetun)
+    environment:
+      - MODE=standalone
+      - TELEMETRY=true
+      - ENABLE_ID_OBFUSCATION=true
+    volumes:
+      - /mnt/Drive1/Docakge/config/speedtest/results:/results
+networks: {}
